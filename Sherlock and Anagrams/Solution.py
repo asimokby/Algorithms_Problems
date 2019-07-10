@@ -20,10 +20,10 @@ def sherlockAndAnagrams(s):
     return sum(sherlock_dict.values())
     
     
-    q = int(raw_input())
+q = int(raw_input())
 
-    for q_itr in xrange(q):
-        s = raw_input()
+for q_itr in xrange(q):
+    s = raw_input()
 
-        result = sherlockAndAnagrams(s)
-        print(result)
+    result = sherlockAndAnagrams(s)
+    print(result)
