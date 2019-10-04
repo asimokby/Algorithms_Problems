@@ -11,13 +11,13 @@
 
 
 
-def get_adjacents_list(current_idx):
+def get_adjacents_list(current_idx, columns_num):
     up = current_idx #the djacent's index above the element 
     down = current_idx #the djacent's index below the element  
     if current_idx == 0: #if the element is the first of the list(it will have no left adjacent)
         right = current_idx + 1
         left = -1
-    elif current_idx == 4: #if the element is the last of the list(it will have no right adjacent)
+    elif current_idx == (columns_num - 1): #if the element is the last of the list(it will have no right adjacent)
         left = current_idx - 1 
         right = -1 
     else: #if the element is not an edge
@@ -27,12 +27,12 @@ def get_adjacents_list(current_idx):
     list_adjacents = [i for i in list_adjacents if i >= 0] #removing the negative adjacents' indexes added earlier. 
     return list_adjacents 
 
-def strokes_num(input_pic):
+def strokes_num(input_pic, columns_num):
     idx_letter = {} #a dict for saving all scanned elements and their indexes in the form {idx:element}
     strokes = 0 #number of strokes: to be incremented.
     for row in input_pic: #iterating through the rows.
         for current_idx in range(len(row)): #scanning every elemet.
-            list_adjacents = get_adjacents_list(current_idx) #getting the list of adjacents' indexes.
+            list_adjacents = get_adjacents_list(current_idx, columns_num) #getting the list of adjacents' indexes.
             adj_doesnt_exist = True #in case none of the adjacents' indexes exists. (will be false if it does exist).
             for adj in list_adjacents: #iterating through the list of adjacents' indexes.
                 if adj in idx_letter: #checking if the adj's index exist in idx_letter.
@@ -50,9 +50,11 @@ def strokes_num(input_pic):
 
 
 #Testing: 
-
+input_pic1_columns_num = 5
 input_pic1 = [["a", "a", "a", "b", "a"], ["a", "b", "a", "b", "a"], ["a", "a", "a", "c", "a"]]
+input_pic2_columns_num = 5
 input_pic2 = [["a", "a", "b", "b", "a"], ["a", "a", "b", "b", "a"], ["a", "a", "a", "c", "b"]]
+input_pic3_columns_num = 3
 input_pic3 = [["a", "a"], ["b", "c"]]
 
 def display_picture(input_pic):
@@ -60,11 +62,11 @@ def display_picture(input_pic):
         print("".join(input_pic[i])) 
 
 display_picture(input_pic1)
-print("Number of strokes: " + str(strokes_num(input_pic1)))
+print("Number of strokes: " + str(strokes_num(input_pic1, input_pic1_columns_num)))
 display_picture(input_pic2)
-print("Number of strokes: " + str(strokes_num(input_pic2)))
+print("Number of strokes: " + str(strokes_num(input_pic2, input_pic2_columns_num)))
 display_picture(input_pic3)
-print("Number of strokes: " + str(strokes_num(input_pic3)))
+print("Number of strokes: " + str(strokes_num(input_pic3, input_pic3_columns_num)))
 
 
 #Output: 
