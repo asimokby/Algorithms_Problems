@@ -14,17 +14,11 @@
 def get_adjacents_list(current_idx, columns_num):
     up = current_idx #the djacent's index above the element 
     down = current_idx #the djacent's index below the element  
-    if current_idx == 0: #if the element is the first of the list(it will have no left adjacent)
-        right = current_idx + 1
-        left = -1
-    elif current_idx == (columns_num - 1): #if the element is the last of the list(it will have no right adjacent)
-        left = current_idx - 1 
-        right = -1 
-    else: #if the element is not an edge
-        left = current_idx - 1
-        right = current_idx + 1
+    left = current_idx - 1 
+    right = current_idx + 1
     list_adjacents = [up, down, right, left] #a list of all adjacents 
-    list_adjacents = [i for i in list_adjacents if i >= 0] #removing the negative adjacents' indexes added earlier. 
+    list_adjacents = [i for i in list_adjacents if i >= 0] #removing the negative adjacents' indexes since they indicate
+    # that the coresponding index is 0(has no left item), or the last item in the list(has no right).
     return list_adjacents 
 
 def strokes_num(input_pic, columns_num):
